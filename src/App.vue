@@ -181,9 +181,9 @@
         <v-card-title class="primary">
           <strong class="subheading">تواصل معنا على السوشال ميديا.</strong>
           <v-spacer></v-spacer>
-          <v-btn v-for="icon in icons" :key="icon" class="mx-4" dark icon>
+          <v-btn v-for="link in footerLinks" :key="link.icon" class="mx-4" dark icon :to="link.to">
             <v-icon size="24px">
-              {{ icon }}
+              {{ link.icon }}
             </v-icon>
           </v-btn>
         </v-card-title>
@@ -234,9 +234,9 @@ export default {
       }
       return items;
     },
-    icons() {
-      let icons = ["mdi-facebook", "mdi-instagram", "mdi-youtube"];
-      return icons;
+    footerLinks() {
+      let links = [{icon: "mdi-facebook", to: "/"},{icon: "mdi-instagram", to: "/"}, {icon: "mdi-youtube", to: "/"}];
+      return links;
     },
     userIsAuthenticated() {
       return (

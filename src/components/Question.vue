@@ -138,7 +138,7 @@ export default {
       return this.$store.getters.question;
     },
     pageUrl() {
-      return "https://m.turathalanbiaa.com"+ this.$route.path;
+      return "https://masael.turathalanbiaa.com"+ this.$route.path;
     },
   },
 

@@ -4,6 +4,8 @@ import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify'
 import "typeface-notokufiarabic/index.css"
+//import "@fontsource/tajawal"
+//import "@fontsource/cairo";
 import VueCookies from 'vue-cookies'
 Vue.use(VueCookies)
 import AlertComponent from './components/Shared/Alert.vue'

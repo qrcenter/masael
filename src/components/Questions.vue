@@ -38,14 +38,14 @@
             <v-list-item>
               <v-list-item-content>
                 <v-list-item-title>
-                  <v-chip class="ma-2" color="primary" v-html=" getText(question.type)"> </v-chip>
+                  <v-chip class="ma-2" color="primary" v-html="getText(question.type)"> </v-chip>
                 </v-list-item-title>
               </v-list-item-content>
 
               <v-row align="center" justify="end">
                 <v-icon
                   class="ml-1"
-                  :color="question.noOfLikes ? 'red ' : 'grey'"
+                  :color="question.noOfLikes ? 'primary' : 'grey'"
                   >{{ question.noOfLikes ? "mdi-heart " : "mdi-heart-outline" }}
                 </v-icon>
                 <span class="subheading ml-2">{{ question.noOfLikes }}</span>

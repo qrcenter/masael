@@ -69,13 +69,13 @@
             <v-list-item-title>الفقه</v-list-item-title>
           </v-list-item>
           <v-list-item  @click="loadQuestionsByType(2)">
-            <v-list-item-title>العقاعد</v-list-item-title>
+            <v-list-item-title>العقائد</v-list-item-title>
           </v-list-item>
           <v-list-item  @click="loadQuestionsByType(3)">
-            <v-list-item-title>القران الكريم</v-list-item-title>
+            <v-list-item-title>القرآن الكريم</v-list-item-title>
           </v-list-item>
           <v-list-item  @click="loadQuestionsByType(4)">
-            <v-list-item-title>الاجتماعية</v-list-item-title>
+            <v-list-item-title>الأجتماعية</v-list-item-title>
           </v-list-item>
         </v-list>
       </v-menu>
@@ -181,7 +181,8 @@
         <v-card-title class="primary">
           <strong class="subheading">تواصل معنا على السوشال ميديا.</strong>
           <v-spacer></v-spacer>
-          <v-btn v-for="link in footerLinks" :key="link.icon" class="mx-4" dark icon :to="link.to">
+          <v-btn
+           v-for="link in footerLinks" :key="link.icon"  class="mx-4" dark icon small  :to="link.to">
             <v-icon size="24px">
               {{ link.icon }}
             </v-icon>
@@ -235,7 +236,9 @@ export default {
       return items;
     },
     footerLinks() {
-      let links = [{icon: "mdi-facebook", to: "/"},{icon: "mdi-instagram", to: "/"}, {icon: "mdi-youtube", to: "/"}];
+      let links = [{icon: "mdi-facebook",color:"blue", to: "/"},
+       {icon: "fa-telegram",color:"red", to: "/"}
+      ];
       return links;
     },
     userIsAuthenticated() {

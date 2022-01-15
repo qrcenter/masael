@@ -1,10 +1,7 @@
 <template>
   <v-container>
     <v-row v-if="loading" align="center" justify="center">
-      <v-progress-circular
-        indeterminate
-        color="fo"
-      ></v-progress-circular>
+      <v-progress-circular indeterminate color="fo"></v-progress-circular>
     </v-row>
     <v-row v-if="!loading">
       <v-col :key="question.data.id" cols="12">
@@ -45,18 +42,13 @@
               </v-list-item-content>
 
               <v-row align="center" justify="end">
-                <v-icon
-                  class="ml-1"
-                  :color="question.data.noOfLikes ? 'red ' : 'grey'"
-                  >{{
-                    question.data.noOfLikes ? "mdi-heart " : "mdi-heart-outline"
-                  }}
-                </v-icon>
-                <span class="subheading ml-2">{{
-                  question.data.noOfLikes
-                }}</span>
-                <span class="ml-1">·</span>
-
+                <v-btn
+                  text
+                  color="primary"
+                  @click="likeQuestion(question.data.id)"
+                >
+                  <v-icon class="ml-2">{{ likeIcon }} </v-icon>
+                </v-btn>
                 <v-speed-dial v-model="dialShare" open-on-hover>
                   <template v-slot:activator>
                     <v-btn text color="primary">
@@ -75,7 +67,7 @@
                   >
                     <v-icon>mdi-facebook</v-icon>
                   </v-btn>
-                  <v-btn
+                  <!-- <v-btn
                     dark
                     fab
                     bottom
@@ -85,8 +77,8 @@
                     target="_blank"
                   >
                     <v-icon>mdi-whatsapp</v-icon>
-                  </v-btn>
-                    <v-btn
+                  </v-btn> -->
+                  <v-btn
                     dark
                     fab
                     bottom
@@ -115,6 +107,17 @@
         </v-card>
       </v-col>
     </v-row>
+    <div class="text-center">
+      <v-snackbar v-model="likeQuestionContent.status" :timeout="timeout" color="fo" dark>
+        {{ likeQuestionContent.message }}
+
+        <template v-slot:action="{ attrs }">
+          <v-btn text v-bind="attrs" @click="likeQuestionContent.status = false">
+            اغلاق
+          </v-btn>
+        </template>
+      </v-snackbar>
+    </div>
   </v-container>
 </template>
 
@@ -123,8 +126,10 @@ export default {
   name: "Question",
   data: () => ({
     dialShare: false,
-    //pageUrl:this.$route.path,
     page: 1,
+    snackbar: false,
+    timeout: 3000,
+    likeIcon: "mdi-heart-outline",
   }),
   props: ["id"],
   mounted() {
@@ -138,7 +143,15 @@ export default {
       return this.$store.getters.question;
     },
     pageUrl() {
-      return "https://masael.turathalanbiaa.com"+ this.$route.path;
+      return "https://masael.turathalanbiaa.com" + this.$route.path;
+    },
+    likeQuestionContent() {
+      if (
+        this.$store.getters.likeQuestion !== null &&
+        this.$store.getters.likeQuestion !== undefined
+      )
+        return this.$store.getters.likeQuestion;
+      else return "";
     },
   },
 
@@ -165,6 +178,21 @@ export default {
     },
     loadQuestion() {
       this.$store.dispatch("loadQuestion", this.id);
+    },
+    likeQuestion(question) {
+      let like = null;
+      if (
+        this.$store.getters.likeQuestion !== null &&
+        this.$store.getters.likeQuestion !== undefined &&
+        this.$store.getters.likeQuestion.message == "تم الاعجاب"
+      ) {
+        like = 0;
+        this.likeIcon = "mdi-heart-outline";
+      } else {
+        like = 1;
+        this.likeIcon = "mdi-heart";
+      }
+      this.$store.dispatch("likeQuestion", { question: question, like: like });
     },
   },
 };

@@ -28,8 +28,7 @@
               type="text"
               required
             ></v-text-field>
-          
-         
+
             <v-btn color="primary" class="mr-4" type="submit" :loading="loading"
               >ارسال</v-btn
             >
@@ -37,18 +36,19 @@
         </v-card-text>
       </v-card>
     </v-dialog>
-
     <div class="text-center">
       <v-snackbar
-        v-model="changeNameStatus"
+        v-model="changeNameContent.status"
         :timeout="timeout"
+         color="fo" dark
         @input="clear()"
+       
       >
         {{ changeNameContent.message }}
 
         <template v-slot:action="{ attrs }">
-          <v-btn color="blue" text v-bind="attrs" @click="snackbar = false">
-            Close
+          <v-btn text v-bind="attrs" @click="changeNameContent.status = false">
+            اغلاق
           </v-btn>
         </template>
       </v-snackbar>
@@ -62,20 +62,11 @@ export default {
     return {
       name: "",
       rules: [(value) => !value],
-      snackbar: false,
       timeout: 3000,
     };
   },
   computed: {
-    changeNameStatus() {
-      if (
-        this.$store.getters.changeName !== null &&
-        this.$store.getters.changeName !== undefined
-      )
-        return true;
-      else return false;
-    },
-   changeNameContent() {
+    changeNameContent() {
       if (
         this.$store.getters.changeName !== null &&
         this.$store.getters.changeName !== undefined
@@ -97,16 +88,13 @@ export default {
   },
   methods: {
     clear() {
-     
-        (this.name = ""),
-      
+      this.name = "";
       this.$store.commit("setChangeName", null);
     },
     postChangeName() {
       this.$store.dispatch("postChangeName", {
         lang: "ar",
         name: this.name,
-    
       });
     },
   },

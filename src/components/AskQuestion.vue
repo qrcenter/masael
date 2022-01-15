@@ -83,10 +83,10 @@ export default {
         { text: "English", val: "en" },
       ],
       typeItems: [
-        { text: "الفقهة", val: "1" },
+        { text: "الفقه", val: "1" },
         { text: "العقائد", val: "2" },
-        { text: "القران الكريم", val: "3" },
-        { text: "اجتماعية", val: "4" },
+        { text: "القرأن الكريم", val: "3" },
+        { text: "الأجتماعية", val: "4" },
       ],
       privacyItems: [
         { text: "عام", val: "1" },

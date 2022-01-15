@@ -16,7 +16,7 @@ export default new Vuex.Store({
     sendQuestion:null,
     sendQuestionDialog: false,
     sendQuestionLoading:false,
-  
+    likeQuestion:null,
     changeName:null,
     changeNameDialog:false,
    changeNameLoading:false,
@@ -42,6 +42,9 @@ export default new Vuex.Store({
     },
     sendQuestionLoading(state) {
       return state.sendQuestionLoading;
+    },
+    likeQuestion(state) {
+      return state.likeQuestion;
     },
     changeName(state) {
       return state.changeName;
@@ -83,6 +86,9 @@ export default new Vuex.Store({
     },
     setSendQuestionLoading(state, payload) {
       state.sendQuestionLoading = payload;
+    },
+    setLikeQuestion(state, payload) {
+      state.likeQuestion = payload;
     },
     setChangeName(state, payload) {
       state.changeName = payload;
@@ -337,6 +343,35 @@ loadQuestionsByType(context, payload) {
         .then((questions) => {
           context.commit("setLoading", false);
           context.commit("setQuestions", questions);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    //likeQuestion
+    likeQuestion(context,payload) {
+      const token = context.getters.user.accessToken;
+      axios
+        .post(
+          "https://masael-api.turathalanbiaa.com/api/questions/like",
+          {
+            question: payload.question,
+            like: payload.like,
+          },
+          {
+            headers: {
+              "App-Key": "base64:Y2tVErFFLJMoLA1qnFKt2jLCa6R9UcS7KC5mdC4c8/w=",
+              "Language": "ar",
+              "Content-Type": "application/json",
+              "Authorization": "Bearer " + token,
+            },
+          }
+        )
+
+        .then((response) => response.data)
+        .then((likeQuestion) => {
+          console.log(likeQuestion)
+          context.commit('setLikeQuestion',likeQuestion)
         })
         .catch((error) => {
           console.log(error);

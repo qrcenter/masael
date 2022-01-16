@@ -27,7 +27,7 @@
             </v-list-item>
           </v-card-title>
           <v-card-text class="body-1 font-weight-black">
-            السؤال({{question.id}}):
+            السؤال({{ question.id }}):
             {{ question.content }}
           </v-card-text>
           <v-divider inset></v-divider>

@@ -61,12 +61,13 @@
         v-model="sendQuestionStatus"
         :timeout="timeout"
         @input="clear()"
+         color="fo" dark
       >
         {{ sendQuestionContent.message }}
 
         <template v-slot:action="{ attrs }">
-          <v-btn color="blue" text v-bind="attrs" @click="snackbar = false">
-            Close
+          <v-btn  text v-bind="attrs" @click="snackbar = false">
+            اغلاق
           </v-btn>
         </template>
       </v-snackbar>

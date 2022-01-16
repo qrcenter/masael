@@ -1,13 +1,14 @@
 <template>
   <v-container>
-      <v-row v-if="!loading&&questions.data==null" align="center" justify="center">
-     {{questions.message}}
+    <v-row
+      v-if="!loading && questions.data == null"
+      align="center"
+      justify="center"
+    >
+      {{ questions.message }}
     </v-row>
     <v-row v-if="loading" align="center" justify="center">
-      <v-progress-circular
-        indeterminate
-        color="fo"
-      ></v-progress-circular>
+      <v-progress-circular indeterminate color="fo"></v-progress-circular>
     </v-row>
     <v-row v-if="!loading">
       <v-col v-for="question in questions.data" :key="question.id" cols="12">
@@ -20,13 +21,13 @@
               <v-list-item-content>
                 <v-list-item-title>{{ question.user }}</v-list-item-title>
                 <v-list-item-subtitle>{{
-                  question.timestamp |moment("dddd, MMMM Do YYYY")
+                  question.timestamp | moment("dddd, MMMM Do YYYY")
                 }}</v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
           </v-card-title>
           <v-card-text class="body-1 font-weight-black">
-            السؤال:
+            السؤال({{question.id}}):
             {{ question.content }}
           </v-card-text>
           <v-divider inset></v-divider>
@@ -38,7 +39,12 @@
             <v-list-item>
               <v-list-item-content>
                 <v-list-item-title>
-                  <v-chip class="ma-2" color="primary" v-html="getText(question.type)"> </v-chip>
+                  <v-chip
+                    class="ma-2"
+                    color="primary"
+                    v-html="getText(question.type)"
+                  >
+                  </v-chip>
                 </v-list-item-title>
               </v-list-item-content>
 
@@ -51,26 +57,9 @@
                 <span class="subheading ml-2">{{ question.noOfLikes }}</span>
                 <span class="ml-1">·</span>
 
-
-<v-btn
-      :to="'/question/' + question.id"
-      fab
-    
-      small
-      text
-    
-    >
-     <v-icon to="/" class="mr-1">
-            mdi-dots-horizontal
-          </v-icon>
-
-    </v-btn>
-
-            
-
-
-
-
+                <v-btn :to="'/question/' + question.id" fab small text>
+                  <v-icon to="/" class="mr-1"> mdi-dots-horizontal </v-icon>
+                </v-btn>
               </v-row>
             </v-list-item>
           </v-card-actions>
@@ -107,23 +96,23 @@ export default {
   },
 
   methods: {
-     getText(val) {
-       var text;
+    getText(val) {
+      var text;
       switch (val) {
         case 1:
-         text="الفقه";
+          text = "الفقه";
           break;
         case 2:
-          text="العقائد";
+          text = "العقائد";
           break;
         case 3:
-         text="القران الكريم";
+          text = "القران الكريم";
           break;
-          case 4:
-         text="الاجتماعية";
+        case 4:
+          text = "الاجتماعية";
           break;
         default:
-          text="الفقه";
+          text = "الفقه";
       }
       return text;
     },

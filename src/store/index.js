@@ -127,9 +127,10 @@ export default new Vuex.Store({
     loadQuestions(context, payload) {
       context.commit("setLoading", true);
       const token = context.getters.user.accessToken;
+      console.log(payload)
       axios
         .get(
-          "https://masael-api.turathalanbiaa.com/api/questions?noOfItems=25&?page=" + payload,
+          "https://masael-api.turathalanbiaa.com/api/questions?noOfItems=25&page=" + payload,
           {
             headers: {
               "App-Key": "base64:Y2tVErFFLJMoLA1qnFKt2jLCa6R9UcS7KC5mdC4c8/w=",
